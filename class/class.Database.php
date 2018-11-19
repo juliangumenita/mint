@@ -12,7 +12,12 @@
 
 
     public function __construct(){
-      self::$CONNECTION = @mysqli_connect($_HOST,$_USERNAME,$_PASSWORD,$_DATABASE);
+      self::$CONNECTION = @mysqli_connect(
+        self::$_HOST,
+        self::$_USERNAME,
+        self::$_PASSWORD,
+        self::$_DATABASE
+      );
       if(!mysqli_connect_errno(self::$CONNECTION)){
         mysqli_set_charset(self::$CONNECTION, "utf8");
         /* Sets the default charset to UTF8. */
@@ -41,7 +46,7 @@
 
     private static function returnCount(string $QUERY){
       $RESULT = @mysqli_query(self::$CONNECTION,$QUERY);
-      if(self::querySuccess($QUERY)){
+      if($RESULT){
         $COUNT = mysqli_num_rows($RESULT);
         return $COUNT;
       } return 0;
@@ -59,7 +64,7 @@
       if($RESULT){
         $ROW = @mysqli_fetch_array($RESULT,MYSQLI_ASSOC);
         return $ROW;
-      } return FALSE;
+      } return NULL;
     }
     public static function fetch(Query $QUERY){
       if(self::connected()){
