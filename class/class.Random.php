@@ -28,5 +28,13 @@
       }
       return $STRING;
     }
+    public static function select(){
+      $COUNT = func_num_args();
+      if($COUNT == 0){
+        return NULL;
+      }
+      $ARGUMENTS = func_get_args();
+      return $ARGUMENTS[self::number(0, $COUNT - 1)];
+    }
   }
 ?>
