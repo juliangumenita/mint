@@ -39,8 +39,8 @@
     /* Returns a secure string for risky areas. */
 
 
-    public static function execute(Query $QUERY){
-      @mysqli_query(self::$CONNECTION,$QUERY::sql());
+    public static function execute(string $QUERY){
+      @mysqli_query(self::$CONNECTION,$QUERY);
     }
     /* Only executes the query, good for heavy usage. */
 
@@ -51,9 +51,9 @@
         return $COUNT;
       } return 0;
     }
-    public static function count(Query $QUERY){
+    public static function count(string $QUERY){
       if(self::connected()){
-        return self::returnCount($QUERY::sql());
+        return self::returnCount($QUERY);
       } return FALSE;
     }
     /* Returns the count of rows; if not successful, returns 0. */
@@ -66,9 +66,9 @@
         return $ROW;
       } return NULL;
     }
-    public static function fetch(Query $QUERY){
+    public static function fetch(string $QUERY){
       if(self::connected()){
-        return self::returnFetch($QUERY::sql());
+        return self::returnFetch($QUERY);
       } return FALSE;
     }
     /* Fetches only one row from query. */
@@ -77,9 +77,9 @@
     private static function returnSuccess(string $QUERY){
       return @mysqli_query(self::$CONNECTION,$QUERY);
     }
-    public static function success(Query $QUERY){
+    public static function success(string $QUERY){
       if(self::connected()){
-        return self::returnSuccess($QUERY::sql());
+        return self::returnSuccess($QUERY);
       } return FALSE;
     }
     /* Returns true if the query successfully executed. */
@@ -95,9 +95,9 @@
         return $ARRAY;
       } return FALSE;
     }
-    public static function multiple(Query $QUERY){
+    public static function multiple(string $QUERY){
       if(self::connected()){
-        return self::returnMultiple($QUERY::sql());
+        return self::returnMultiple($QUERY);
       } return FALSE;
     }
     /* Fetches multiple rows from query and puts them into an array. */
