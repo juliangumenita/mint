@@ -7,7 +7,7 @@
     /* You can change connection strings here. */
 
 
-    private static $CONNECTED = FALSE;
+    private static $CONNECTED = false;
     private static $CONNECTION;
 
 
@@ -34,13 +34,21 @@
     public static function secure($STRING){
       if(self::connected()){
         return @mysqli_real_escape_string(self::$CONNECTION, $STRING);
-      } return FALSE;
+      } return false;
     }
     /* Returns a secure string for risky areas. */
 
 
-    public static function execute(string $QUERY){
-      @mysqli_query(self::$CONNECTION,$QUERY);
+    public static function execute(){
+      if(self::connected()){
+        $ARGS = func_get_args();
+        foreach ($ARGS as $ARG) {
+          is_string($ARG){
+            @mysqli_query(self::$CONNECTION,$QUERY);
+          }
+        }
+        return true;
+      } return false;
     }
     /* Only executes the query, good for heavy usage. */
 
@@ -54,7 +62,7 @@
     public static function count(string $QUERY){
       if(self::connected()){
         return self::returnCount($QUERY);
-      } return FALSE;
+      } return false;
     }
     /* Returns the count of rows; if not successful, returns 0. */
 
@@ -69,7 +77,7 @@
     public static function fetch(string $QUERY){
       if(self::connected()){
         return self::returnFetch($QUERY);
-      } return FALSE;
+      } return false;
     }
     /* Fetches only one row from query. */
 
@@ -80,7 +88,7 @@
     public static function success(string $QUERY){
       if(self::connected()){
         return self::returnSuccess($QUERY);
-      } return FALSE;
+      } return false;
     }
     /* Returns true if the query successfully executed. */
 
@@ -93,12 +101,12 @@
           @array_push($ARRAY, $ROW);
         }
         return $ARRAY;
-      } return FALSE;
+      } return false;
     }
     public static function multiple(string $QUERY){
       if(self::connected()){
         return self::returnMultiple($QUERY);
-      } return FALSE;
+      } return false;
     }
     /* Fetches multiple rows from query and puts them into an array. */
   }
