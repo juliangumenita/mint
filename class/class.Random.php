@@ -1,40 +1,40 @@
 <?php
   class Random{
-    public static function number(int $_MIN, int $_MAX, $BETWEEN = FALSE){
-      $MIN = ($BETWEEN) ? $_MIN + 1 : $_MIN;
-      $MAX = ($BETWEEN) ? $_MAX - 1 : $_MAX;
-      return rand($MIN, $MAX);
+    public static function number(int $minNumber, int $maxNumber, $between = false){
+      $min = ($between) ? $minNumber + 1 : $minNumber;
+      $max = ($between) ? $maxNumber - 1 : $maxNumber;
+      return rand($min, $max);
     }
-    public static function string($LENGHT = 16, $MODE = "all"){
-      $SET = array(
+    public static function string($lenght = 16, $mode = "all"){
+      $set = array(
         "lovercase" => "abcdefghijklmnopqrstuvwxyz",
         "uppercase" => "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "number" => "0123456789"
       );
-      $LIST = array(
-        "all" => $SET["lovercase"] . $SET["uppercase"] . $SET["number"],
-        "number" => $SET["number"],
-        "lovercase" => $SET["lovercase"],
-        "lovercase-number" => $SET["lovercase"] . $SET["number"],
-        "uppercase" => $SET["uppercase"],
-        "uppercase-number" => $SET["uppercase"] . $SET["number"],
-        "lovercase-uppercase" => $SET["lovercase"] . $SET["uppercase"]
+      $list = array(
+        "all" => $set["lovercase"] . $set["uppercase"] . $set["number"],
+        "number" => $set["number"],
+        "lovercase" => $set["lovercase"],
+        "lovercase-number" => $set["lovercase"] . $set["number"],
+        "uppercase" => $set["uppercase"],
+        "uppercase-number" => $set["uppercase"] . $set["number"],
+        "lovercase-uppercase" => $set["lovercase"] . $set["uppercase"]
       );
-      $CHARSET = $LIST[$MODE];
-      $CHARSET_LENGHT = strlen($CHARSET);
-      $STRING = NULL;
-      for ($i = 0; $i < $LENGHT; $i++) {
-          $STRING .= $CHARSET[rand(0, $CHARSET_LENGHT - 1)];
+      $charset = $list[$mode];
+      $charsetLenght = strlen($charset);
+      $string = NULL;
+      for ($i = 0; $i < $lenght; $i++) {
+          $string .= $charset[rand(0, $charsetLenght - 1)];
       }
-      return $STRING;
+      return $string;
     }
     public static function select(){
-      $COUNT = func_num_args();
-      if($COUNT == 0){
+      $count = func_num_args();
+      if($count == 0){
         return NULL;
       }
-      $ARGUMENTS = func_get_args();
-      return $ARGUMENTS[self::number(0, $COUNT - 1)];
+      $arguments = func_get_args();
+      return $arguments[self::number(0, $count - 1)];
     }
   }
 ?>
