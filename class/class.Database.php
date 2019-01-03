@@ -74,8 +74,11 @@
         return $row;
       } return NULL;
     }
-    public static function fetch(string $query){
+    public static function fetch(string $query, $key = null){
       if(self::connected()){
+        if(!is_null($key)){
+          return self::returnFetch($query)[$key];
+        }
         return self::returnFetch($query);
       } return false;
     }
