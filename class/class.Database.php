@@ -43,8 +43,8 @@
       if(self::connected()){
         $args = func_get_args();
         foreach ($args as $arg) {
-          is_string($arg){
-            @mysqli_query(self::$connection,$query);
+          if(is_string($arg)){
+            @mysqli_query(self::$connection,$arg);
           }
         }
         return true;
