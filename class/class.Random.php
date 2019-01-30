@@ -1,24 +1,32 @@
 <?php
   class Random{
+    const ALL = "all";
+    const NUMBER = "number";
+    const LOWERCASE = "lowercase";
+    const LOWERCASE_NUMBER = "lowercase-number";
+    const UPPERCASE = "uppercase";
+    const UPPERCASE_NUMBER = "uppercase-number";
+    const LOWERCASE_UPPERCASE = "lowercase-uppercase";
+
     public static function number(int $minNumber, int $maxNumber, $between = false){
       $min = ($between) ? $minNumber + 1 : $minNumber;
       $max = ($between) ? $maxNumber - 1 : $maxNumber;
       return rand($min, $max);
     }
-    public static function string($lenght = 16, $mode = "all"){
+    public static function string($lenght = 16, $mode = self::ALL){
       $set = array(
-        "lovercase" => "abcdefghijklmnopqrstuvwxyz",
+        "lowercase" => "abcdefghijklmnopqrstuvwxyz",
         "uppercase" => "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "number" => "0123456789"
       );
       $list = array(
-        "all" => $set["lovercase"] . $set["uppercase"] . $set["number"],
-        "number" => $set["number"],
-        "lovercase" => $set["lovercase"],
-        "lovercase-number" => $set["lovercase"] . $set["number"],
-        "uppercase" => $set["uppercase"],
-        "uppercase-number" => $set["uppercase"] . $set["number"],
-        "lovercase-uppercase" => $set["lovercase"] . $set["uppercase"]
+        self::ALL => $set["lowercase"] . $set["uppercase"] . $set["number"],
+        self::NUMBER => $set["number"],
+        self::LOWERCASE => $set["lowercase"],
+        self::LOWERCASE_NUMBER => $set["lowercase"] . $set["number"],
+        self::UPPERCASE => $set["uppercase"],
+        self::UPPERCASE_NUMBER => $set["uppercase"] . $set["number"],
+        self::LOWERCASE_UPPERCASE => $set["lowercase"] . $set["uppercase"]
       );
       $charset = $list[$mode];
       $charsetLenght = strlen($charset);
